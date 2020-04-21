@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница пользователя</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/static/test.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+
+    <div class="col-8">
+        <form th:action="@{/user}">
+                <span style="color:white"><b>
+                <td  th:text="${user.email}"> </b> with roles:</span>
+            <span style="color:yellow">
+                <td   th:each="role : ${user.roleSet}" >
+                    <span th:text="${role.rolesName}"></span>
+                </td>
+            </span>
+        </form>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-outline-success"  href="/logout">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-user-tab" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-user" aria-selected="true">User</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="tab-content" id="v-pills-tabContent">
+                <h2>User information page</h2>
+
+                <form action="/user"  >
+                    <table class="table" id="user-table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Логин</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Фамилия</th>
+                            <th scope="col">Город</th>
+                            <th scope="col">Возраст</th>
+                            <th scope="col">Роль</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+<!--                        <tr>-->
+<!--                            <th scope="row"  th:text="${user.id}"></th>-->
+<!--                            <td th:text="${user.email}"></td>-->
+<!--                            <td th:text="${user.name}"></td>-->
+<!--                            <td th:text="${user.surname}"></td>-->
+<!--                            <td th:text="${user.city}"></td>-->
+<!--                            <td th:text="${user.age}"></td>-->
+<!--                            <td>-->
+<!--                                <li th:each="role : ${user.roleSet}">-->
+<!--                                    <span th:text="${role.rolesName}">Роль</span>-->
+<!--                                </li>-->
+<!--                            </td>-->
+
+<!--                        </tr>-->
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+<script src="/static/test.js"></script>
+</body>
+</html>

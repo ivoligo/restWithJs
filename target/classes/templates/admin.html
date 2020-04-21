@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:thth="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+
+
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="col-8" >
+        <form th:action="@{/admin}">
+            <span style="color:white"><b>
+                <td  th:text="${user.email}"> </b> with roles:</span>
+            <span style="color:yellow">
+                <td   th:each="role : ${user.roleSet}" >
+                    <span th:text="${role.rolesName}"></span>
+                </td>
+            </span>
+            </td>
+        </form>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-outline-success"  href="/logout">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-adminPanel-tab" data-toggle="pill" href="#v-pills-adminPanel" role="tab" aria-controls="v-pills-admin" aria-selected="true">Admin</a>
+                <a class="nav-link" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab" aria-controls="v-pills-user" aria-selected="false">User</a>
+            </div>
+        </div>
+
+        <div class="col-10">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-adminPanel" role="tabpanel" aria-labelledby="v-pills-adminPanel-tab">
+                    <h2>Admin panel</h2>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active"  href="#userslist" role="tab" data-toggle="tab" aria-selected="true">Users table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#newuser" role="tab" data-toggle="tab" aria-selected="false">New User</a></li>
+                    </ul>
+                    <br>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="userslist">
+                            <div class="alert alert-dark">All Users</div>
+                            <table class="table" id="all-user-table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col" >Логин</th>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Фамилия</th>
+                                    <th scope="col">Город</th>
+                                    <th scope="col">Возраст</th>
+                                    <th scope="col">Роль</th>
+                                    <th scope="col">Дествие</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="newuser" >
+                            <form id="user-create-form" method="post">
+                                <table class="form-group" id="create-user-table" >
+                                    <thead class="thead-dark">
+                                    <div class="alert alert-dark">Add new user</div>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><label for="name1" >Имя</label></td>
+                                        <td><input class="form-control" required type="text"  id="name1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="surname">Фамилия</label></td>
+                                        <td><input class="form-control" required type="text" name="surname" id="surname"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="email">email/login</label></td>
+                                        <td><input class="form-control" required type="email" name="email" id="email"  placeholder="email, она же логин"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="password"> Пароль</label></td>
+                                        <td><input class="form-control" required type="password" name="password" id="password"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="city">Город</label></td>
+                                        <td><input class="form-control" required type="text" name="city"  id="city"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="age">Возраст</label> </td>
+                                        <td><input class="form-control" required type="number" name="age"  id="age"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="roleSet">Роли </label>  </td>
+                                        <td>
+                                            <select class="form-control" required name = "roleSet" multiple id="roleSet">
+                                                <option value="user">user</option>
+                                                <option value="admin">admin</option>
+                                                <option value="otherUser">otherUser</option>
+                                                <option value="webUser">webUser</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!--                                    <button type="button" class="btn btn-info">save</button>-->
+                                <input id="newuser-add" class="btn btn-info" type="submit" value="Сохранить">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                    <form action="/user"  >
+                        <table class="table" id="user-table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Логин</th>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Фамилия</th>
+                                <th scope="col">Город</th>
+                                <th scope="col">Возраст</th>
+                                <th scope="col">Роль</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<br>
+<script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script src="/static/test.js"></script>
+<script src="/static/modal.js"></script>
+</body>
+</html>
