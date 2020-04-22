@@ -14,9 +14,10 @@ $.ajax({
         var htmlTable = "";
         // $("#all-user-table tbody").empty();
         for (var i = 0; i < listUsers.length; i++) {
-
+            // var $dataId = listUsers[i].id;
             htmlTable += ('<tr id="#list">')
             htmlTable += ('<td id="#tableId">' + listUsers[i].id + '</td>');
+
             htmlTable += ('<td id="#tableEmail">' + listUsers[i].email + '</td>');
             htmlTable += ('<td id="#tableName">' + listUsers[i].name + '</td>');
             htmlTable += ('<td id="#tableSurname">' + listUsers[i].surname + '</td>');
@@ -29,13 +30,24 @@ $.ajax({
             htmlTable += ( '</td>');
             htmlTable+= ('<td>');
             htmlTable += ('<button id ="button-edit-user" type="button" class="btn btn-primary editUser" data-toggle="modal" data-target="#modalEdit"\n' +
-                '            value="Изменить" style="float:left" >изменить</button>')
+                '            value="Изменить" style="float:left" data-id="'+ listUsers[i].id +'" >изменить</button> ');
+
             htmlTable += ('<button id ="button-delete-user" type="button" class="btn btn-secondary deleteUser" data-toggle="modal" data-target="#modalDelete"\n' +
-                '            value="Удалить" style="float:left" >Удалить</button>')
+                '            value="Удалить" style="float:left" >Удалить</button>');
             htmlTable+= ('<td>');
             htmlTable += ('</tr>');
+            // htmlTable.button-edit-user.dataset.id === listUsers[i].id;
+            // var b = document.getElementById("buttonedituser");
+            // var z = document.querySelector('data-id');
+            // b.setAttribute("data-id", this.listUsers[i].id);
+            // $("#button-edit-user").attr('data-id', listUsers[i].id);
+
         }
         $("#all-user-table tbody").html(htmlTable);
+        // var b = document.getElementById("button-edit-user");
+        // // b.dataset.id === "dataId";
+        // // b.setAttribute("data-id", 'dataId');
+        // z.setAttribute("data-id", this.id)
     }
 
 });

@@ -1,6 +1,6 @@
 
-var $id = $('id');
-var $name= $('#name3');
+var $id = $('#id');
+var $name = $('#name3');
 var $surname = $('#surname3');
 var $email = $('#email3');
 var test = $('#test3');
@@ -13,7 +13,7 @@ function _createModal(options){
     const editModal = document.createElement('div')
     // editModal.classList.add('modal')
     editModal.insertAdjacentHTML('afterbegin', `
-     <div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="modalEditTitle" aria-hidden="true" id = "modalEdit">
+     <div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="modalEditTitle" aria-hidden="true" id = "modalEdit" >
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content" >
 
@@ -31,15 +31,15 @@ function _createModal(options){
                                                          <thead class="thead-dark">
                                                             <div class="alert alert-dark">Редактирование</div>
                                                           </thead>
-                                                 
+                                                 <tbody>
                                                         
                                                                 <tr>
                                                                     <td><label>ID</label></td>
-                                                                    <td> <input required type="text"  id="id" disabled ></td>
+                                                                    <td> <input required type="text" name="id" id="id" disabled ></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><label>Имя</label></td>
-                                                                    <td><input required type="text" name="name" id="name3"></td>
+                                                                    <td><input required type="text" name="data-name" id="name3"></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><label>Фамилия</label></td>
@@ -75,14 +75,14 @@ function _createModal(options){
                                                                 </tr>
  
     
-                                                     
+                                                     </tbody>
                                                        
                                                                 
                                                   </table>
                                                 </div>
                                                 <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary editSave" data-dismiss="modal">Close</button>
-                                                   <input type="submit" class="btn btn-primary"  value="Save Change">
+                                                   <input type="submit" class="btn btn-primary" id="btn-save-edit" value="Save Change">
                                                 </div>
 </form>
                                             </div>
@@ -93,20 +93,23 @@ function _createModal(options){
 }
 //
 $(_createModal()).ready(function(){
-    //при нажатию на любую кнопку, имеющую класс .btn / .editUser / click(function()
-    var data = {
-        id: $(this).id,
-        name: $name.val(),
-        surname: $surname.val(),
-        email: $email.val(),
-        password: $password.val(),
-        city: $city.val(),
-        age: $age.val(),
-        roleSet: $roleSet.val()
-    }
+
+
     $('#button-edit-user').on('click', function()  {
+        const id = this.getAttribute('data-id');
+        // const login = this.getAttribute('data-email');
+        // const password = this.getAttribute('data-password');
+        // const name = this.getAttribute('data-name');
+        // const roles = this.getAttribute('data-role');
+        document.getElementById("id").value = id;
+        // document.getElementById("email3").value = login;
+        // document.getElementById("password3").value = password;
+        // document.getElementById("name3").value = name;
+        // document.getElementById("roleSet3").value = roles;
 
+        get
 
+        if save edit
         $.ajax({
 
             url: '/rest/update/id',
@@ -118,11 +121,11 @@ $(_createModal()).ready(function(){
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            // dataType: 'JSON',
+            dataType: 'JSON',
             data:JSON.stringify(data),
-            success: function (data) {
+            success: function (updateUser) {
 
-                $("#update-user-table").html(data);
+                    $("#update-user-table ").html(updateUser);
 
 
             }
@@ -135,6 +138,15 @@ $(_createModal()).ready(function(){
     });
 
 });
+
+
+
+
+
+
+
+
+
 
 // function _deleteModal(options){
 //     const editModal = document.createElement('div')

@@ -6,12 +6,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.model.Role;
 import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/rest")
@@ -63,9 +66,19 @@ public class AdminRestController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateUser(@Valid @RequestBody User user, @PathVariable long id){
-        user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        userService.update(user);
+    public ResponseEntity<User> updateUser(@Valid @RequestBody User user, @PathVariable long id){
+//        user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = userService.findUserById(id);
+        Set<Role> roleSet = new HashSet<>();
+        for (Role role: user.getRoleSet()) {
+            System.out.println(role);
+            role = roleService.findRoleByName(role.getRolesName());
+            System.out.println(role);
+            roleSet.add(role);
+        }
+        user.setRoleSet(roleSet);
+        user = userService.update(user);
+        return new ResponseEntity<>(user , HttpStatus.OK);
     }
 
 

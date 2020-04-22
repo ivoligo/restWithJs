@@ -34,10 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user) {
+    public User update(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.update(user);
+        return user;
     }
 
     @Override
