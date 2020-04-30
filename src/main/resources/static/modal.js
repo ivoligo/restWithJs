@@ -173,7 +173,7 @@ $(document).on('click', '#btn-save-edit', function () {
         data:JSON.stringify(user),
         success: function (data) {
             user = data;
-
+            getAllUsers();
         }
     })
 
@@ -194,8 +194,9 @@ $(document).on('click', '#button-deleteModal-user', function () {
         dataType: 'JSON',
         // data:JSON.stringify(user),
         success: function (data) {
-alert("Пользователь удален");
-getAllUsers();
+
+            getAllUsers();
+            alert("Пользователь c (id: "  + id +") удален");
         }
 
     })

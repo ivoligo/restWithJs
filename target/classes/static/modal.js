@@ -1,14 +1,4 @@
 
-// var $id = $('#id');
-// var $name = $('#name3');
-// var $surname = $('#surname3');
-// var $email = $('#email3');
-// var test = $('#test3');
-// var $password = $('#password3');
-// var $city = $('#city3');
-// var $age = $('#age3');
-// var $roleSet = $('#roleSet3');
-
 function _createModal(options){
     const editModal = document.createElement('div')
     // editModal.classList.add('modal')
@@ -178,19 +168,15 @@ $(document).on('click', '#btn-save-edit', function () {
         async: true,
         cache: false,
         contentType: 'application/json',
-        // headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json'
-        // },
+
         dataType: 'JSON',
         data:JSON.stringify(user),
         success: function (data) {
             user = data;
-            // getAllUsers()
+            getAllUsers();
         }
     })
-    // return user;
-    // $("#update-user-table tbody").html(user);
+
 })
 
 $(document).on('click', '#button-deleteModal-user', function () {
@@ -208,8 +194,9 @@ $(document).on('click', '#button-deleteModal-user', function () {
         dataType: 'JSON',
         // data:JSON.stringify(user),
         success: function (data) {
-alert("Пользователь удален");
+
 getAllUsers();
+            alert("Пользователь c id: "  + id +" удален");
         }
 
     })
@@ -233,9 +220,7 @@ function getAllUsers(){
         dataType: 'JSON',
         success: function (listUsers) {
             var htmlTable = "";
-            // $("#all-user-table tbody").empty();
             for (var i = 0; i < listUsers.length; i++) {
-                // var $dataId = listUsers[i].id;
                 htmlTable += ('<tr id="#list">')
                 htmlTable += ('<td id="#tableId">' + listUsers[i].id + '</td>');
 
