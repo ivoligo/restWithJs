@@ -1,6 +1,5 @@
 C:\JMproject\REST_js\src\main\java\web\controller\AdminController.java
 C:\JMproject\REST_js\src\main\java\web\config\SpringSecurityConfig.java
-C:\JMproject\REST_js\src\main\java\web\controller\UserRestController.java
 C:\JMproject\REST_js\src\main\java\web\dao\UserDaoImpl.java
 C:\JMproject\REST_js\src\main\java\web\dao\UserDao.java
 C:\JMproject\REST_js\src\main\java\web\config\SecurityConfig.java
@@ -12,8 +11,11 @@ C:\JMproject\REST_js\src\main\java\web\service\RoleService.java
 C:\JMproject\REST_js\src\main\java\web\service\UserServiceImpl.java
 C:\JMproject\REST_js\src\main\java\web\Application.java
 C:\JMproject\REST_js\src\main\java\web\service\RoleServiceImpl.java
+C:\JMproject\REST_js\src\main\java\web\mappers\UserMapper.java
 C:\JMproject\REST_js\src\main\java\web\controller\AdminRestController.java
+C:\JMproject\REST_js\src\main\java\web\Dto\RoleDto.java
 C:\JMproject\REST_js\src\main\java\web\dao\RoleDao.java
+C:\JMproject\REST_js\src\main\java\web\Dto\UserDto.java
 C:\JMproject\REST_js\src\main\java\web\model\User.java
 C:\JMproject\REST_js\src\main\java\web\model\Role.java
 C:\JMproject\REST_js\src\main\java\web\service\UserService.java

@@ -29,33 +29,29 @@ $.ajax({
             }
             htmlTable += ( '</td>');
             htmlTable+= ('<td>');
-            htmlTable += ('<button id ="button-edit-user" type="button" class="btn btn-primary editUser" data-toggle="modal" data-target="#modalEdit"\n' +
+            htmlTable += ('<button id ="button-edit-user" type="button" class="btn btn-primary editUser" data-toggle="modal" data-target="#modalEdit"    \n' +
                 '            value="Изменить" style="float:left" data-id="'+ listUsers[i].id +'" >изменить</button> ');
 
-            htmlTable += ('<button id ="button-delete-user" type="button" class="btn btn-secondary deleteUser" data-toggle="modal" data-target="#modalDelete"\n' +
-                '            value="Удалить" style="float:left" >Удалить</button>');
+            htmlTable += ('<button id ="button-deleteModal-user" type="button" class="btn btn-secondary deleteUser" data-toggle="modal" data-target="#modalDelete"\n' +
+                '            value="Удалить" style="float:left" data-id="'+ listUsers[i].id +'">Удалить</button>');
             htmlTable+= ('<td>');
             htmlTable += ('</tr>');
-            // htmlTable.button-edit-user.dataset.id === listUsers[i].id;
-            // var b = document.getElementById("buttonedituser");
-            // var z = document.querySelector('data-id');
-            // b.setAttribute("data-id", this.listUsers[i].id);
-            // $("#button-edit-user").attr('data-id', listUsers[i].id);
 
         }
         $("#all-user-table tbody").html(htmlTable);
-        // var b = document.getElementById("button-edit-user");
-        // var z = document.querySelector('buttonedituser');
-        // // b.dataset.id === "dataId";
-        // // b.setAttribute("data-id", 'dataId');
-        // z.setAttribute("data-id", this.id)
+
     }
 
 });
 
+
+// $(document).on('click', '#btn-login', function () {
+
+
 $.ajax({
     type: 'GET',
-    url: "/rest/getUser",
+    // url: "/rest/getUser?id="+id,
+    url: "rest/getUserLogin",
     contentType: 'application/json',
     headers: {
         'Accept': 'application/json',
@@ -64,7 +60,8 @@ $.ajax({
     async: true,
     cache: false,
     dataType: 'JSON',
-    success: function (getUser) {
+    success: function (data) {
+        var getUser = data;
         var htmlUserTable = "";
         htmlUserTable += ('<tr>');
         htmlUserTable += ('<td >' + getUser.id + '</td>');
@@ -84,6 +81,7 @@ $.ajax({
 
     }
 });
+// });
 
 var $name= $('#name1');
 var $surname = $('#surname');
@@ -96,9 +94,10 @@ var $roleSet = $('#roleSet');
 
 
 
-$('#newuser-add').on('click', function() {
+// $('#newuser-add').on('click', function() {
+$(document).on('click', '#newuser-add', function () {
 
-    var data = {
+    var user = {
         name: $name.val(),
         surname: $surname.val(),
         email: $email.val(),
@@ -107,6 +106,7 @@ $('#newuser-add').on('click', function() {
         age: $age.val(),
         roleSet: $roleSet.val()
     }
+    // let user = null
     $.ajax({
     url: '/rest/createUser',
     type: "POST",
@@ -118,9 +118,10 @@ $('#newuser-add').on('click', function() {
         'Content-Type': 'application/json'
     },
     // dataType: 'JSON',
-    data:JSON.stringify(data),
-    success: function (createUser) {
-        $("#create-user-table tbody").html(data);
+    data:JSON.stringify(user),
+    success: function () {
+
+        $("#create-user-table tbody").html(user);
 
 
     }

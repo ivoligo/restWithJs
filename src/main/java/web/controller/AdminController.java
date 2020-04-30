@@ -16,8 +16,6 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
-//@RestController
-//@RequestMapping("/rest")
 public class AdminController {
     private UserService userService;
     private RoleService roleService;
