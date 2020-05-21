@@ -195,8 +195,8 @@ $(document).on('click', '#button-deleteModal-user', function () {
         // data:JSON.stringify(user),
         success: function (data) {
 
-getAllUsers();
-            alert("Пользователь c id: "  + id +" удален");
+            getAllUsers();
+            alert("Пользователь c (id: "  + id +") удален");
         }
 
     })
@@ -204,6 +204,7 @@ getAllUsers();
 
 
 })
+
 
 function getAllUsers(){
 

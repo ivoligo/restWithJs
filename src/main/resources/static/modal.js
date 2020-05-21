@@ -205,6 +205,7 @@ $(document).on('click', '#button-deleteModal-user', function () {
 
 })
 
+
 function getAllUsers(){
 
     $.ajax({

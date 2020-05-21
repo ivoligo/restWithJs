@@ -55,20 +55,35 @@ public class AdminRestController {
 
     @GetMapping("/getUser")
     public User getUserId(@RequestParam("id") Long id){
-
+//    public User getUserId(@PathVariable("id") long id){
         return userService.findUserById(id);
     }
 
     @PostMapping("/createUser")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody UserDto userDto
+                           ){
 
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setName(userDto.getName());
+        user.setEmail(userDto.getEmail());
+        user.setCity(userDto.getCity());
+        user.setAge(userDto.getAge());
+        user.setSurname(userDto.getSurname());
+        user.setPassword(userDto.getPassword());
         Set<Role> roleSet = new HashSet<>();
-        for (Role role : user.getRoleSet()){
+        for (Role role : userDto.getRole()){
             role = roleService.findRoleByName(role.getRolesName());
             roleSet.add(role);
         }
-
         user.setRoleSet(roleSet);
+
+//        Set<Role> roleSet = new HashSet<>();
+//        for (Role role : user.getRoleSet()){
+//            role = roleService.findRoleByName(role.getRolesName());
+//            roleSet.add(role);
+//        }
+//        user.setRoleSet(roleSet);
         if (!userService.findUserByEmail(user.getEmail()).isPresent()) {
            user  = userService.create(user);
         }
@@ -82,38 +97,44 @@ public class AdminRestController {
         userService.delete(user);
     }
 
-    @PutMapping("/update")
-    public User updateUser(
-            @Valid @RequestBody User user){
-        Set<Role> roleSet = new HashSet<>();
-        for (Role role: user.getRoleSet()) {
-            role = roleService.findRoleByName(role.getRolesName());
-            roleSet.add(role);
-        }
-        user.setRoleSet(roleSet);
-        user.setPassword(user.getPassword());
-        user = userService.update(user);
-        return user;
-    }
-
 //    @PutMapping("/update")
-//    public User updateUser (@Valid @RequestBody UserDto userDto){
-//        User user = new User();
-//        user.setPassword(userDto.getPassword());
-//        user.setId(userDto.getId());
-//        user.setName(userDto.getName());
-//        user.setSurname(userDto.getSurname());
-//        user.setAge(userDto.getAge());
-//        user.setCity(userDto.getCity());
-//        user.setEmail(userDto.getEmail());
+//    public User updateUser(
+//            @Valid @RequestBody User user){
 //        Set<Role> roleSet = new HashSet<>();
-//        userDto.setRole(userDto.getRole());
-//        for (String role : userDto.getRole()) {
-//            Role role1 = roleService.findRoleByName(role);
-//            roleSet.add(role1);
+//        for (Role role: user.getRoleSet()) {
+//            role = roleService.findRoleByName(role.getRolesName());
+//            roleSet.add(role);
 //        }
 //        user.setRoleSet(roleSet);
-//        userService.update(user);
+//        user.setPassword(user.getPassword());
+//        user = userService.update(user);
 //        return user;
 //    }
+
+    @GetMapping("/getRole")
+    public Role getRoleByName(@RequestParam("roleSet") String rolesName){
+        return roleService.findRoleByName(rolesName);
+    }
+
+    @PutMapping("/update")
+    public User updateUser (@Valid @RequestBody UserDto userDto){
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setPassword(userDto.getPassword());
+        user.setId(userDto.getId());
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setAge(userDto.getAge());
+        user.setCity(userDto.getCity());
+        user.setEmail(userDto.getEmail());
+        Set<Role> roleSet = new HashSet<>();
+        userDto.setRole(userDto.getRole());
+        for (Role role : userDto.getRole()) {
+            Role role1 = roleService.findRoleByName(role.getRolesName());
+            roleSet.add(role1);
+        }
+        user.setRoleSet(roleSet);
+        userService.update(user);
+        return user;
+    }
 }
